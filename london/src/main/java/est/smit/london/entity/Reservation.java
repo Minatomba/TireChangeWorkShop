@@ -2,10 +2,14 @@ package est.smit.london.entity;
 
 
 import jakarta.persistence.*;
+import lombok.Getter;
+import lombok.Setter;
 import org.springframework.format.annotation.DateTimeFormat;
 
 import java.sql.Date;
 
+@Setter
+@Getter
 @Entity
 @Table(name = "Reservation")
 public class Reservation {
@@ -20,35 +24,4 @@ public class Reservation {
 
     private String placeOfShop;
 
-    public int getId() {
-        return id;
-    }
-
-    public void setId(int id) {
-        this.id = id;
-    }
-
-    public Date getFilterDate() {
-        return filterDate;
-    }
-
-    public void setFilterDate(Date filterDate) {
-        this.filterDate = filterDate;
-    }
-
-    public String getVehicleType() {
-        return vehicleType;
-    }
-
-    public void setVehicleType(String vehicleType) {
-        this.vehicleType = vehicleType;
-    }
-
-    public String getPlaceOfShop() {
-        return placeOfShop;
-    }
-
-    public void setPlaceOfShop(String placeOfShop) {
-        this.placeOfShop = placeOfShop;
-    }
 }

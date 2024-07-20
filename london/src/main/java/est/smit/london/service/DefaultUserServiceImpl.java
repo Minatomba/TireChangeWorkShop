@@ -19,7 +19,7 @@ import java.util.Set;
 import java.util.stream.Collectors;
 
 @Service
-public class DefaultUserServiceImpl implements DefaultUserService {
+public class DefaultUserServiceImpl {
 
     @Autowired
     private UserRepository userRepo;
@@ -29,15 +29,14 @@ public class DefaultUserServiceImpl implements DefaultUserService {
 
     private BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
 
-    @Override
+//    @Override
     public UserDetails loadUserByUsername(String email) throws UsernameNotFoundException {
 
-        User user = userRepo.findByEmail(email);
-        if(user == null) {
-            System.out.println("User not found with email: " + email);
+        User user = userRepo.findUserByEmail(email);
+        if (user == null) {
+            System.out.println("Email or password is wrong: " + email);
             throw new UsernameNotFoundException("Invalid username or password.");
         }
-        System.out.println("User found with email: " + email);
         return new org.springframework.security.core.userdetails.User(user.getEmail(), user.getPassword(), mapRolesToAuthorities(user.getRole()));
     }
 
@@ -45,10 +44,15 @@ public class DefaultUserServiceImpl implements DefaultUserService {
         return roles.stream().map(role -> new SimpleGrantedAuthority(role.getRole())).collect(Collectors.toList());
     }
 
-    @Override
+//    @Override
     public User save(UserRegisteredDTO userRegisteredDTO) {
-        Role role = roleRepo.findByRole("USER");
+        Role role = new Role();
 
+        if (userRegisteredDTO.getRole().equals("USER"))
+            role = roleRepo.findByRole("USER");
+        else if (userRegisteredDTO.getRole().equals("ADMIN")) {
+            role = roleRepo.findByRole("ADMIN");
+        }
         User user = new User();
         user.setEmail(userRegisteredDTO.getEmail_id());
         user.setName(userRegisteredDTO.getName());

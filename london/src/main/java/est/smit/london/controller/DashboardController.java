@@ -6,10 +6,12 @@ import est.smit.london.entity.Reservation;
 import est.smit.london.entity.User;
 import est.smit.london.repository.UserRepository;
 import est.smit.london.service.DefaultUserService;
+import est.smit.london.service.DefaultUserServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.context.SecurityContext;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -21,9 +23,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 @RequestMapping("/dashboard")
 public class DashboardController {
 
-    private DefaultUserService userService;
+    private DefaultUserServiceImpl userService;
 
-    public DashboardController(DefaultUserService userService) {
+    public DashboardController(DefaultUserServiceImpl userService) {
         super();
         this.userService = userService;
     }
@@ -53,7 +55,7 @@ public class DashboardController {
     private String returnUsername() {
         SecurityContext securityContext = SecurityContextHolder.getContext();
         UserDetails user = (UserDetails) securityContext.getAuthentication().getPrincipal();
-        User users = userRepository.findByEmail(user.getUsername());
+        User users = userRepository.findUserByEmail(user.getUsername());
         return users.getName();
     }
 
