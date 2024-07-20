@@ -18,12 +18,6 @@ public class LoginController {
     @Autowired
     private DefaultUserService userService;
 
-    private BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
-
-    /*
-     * public LoginController(DefaultUserService userService) { super();
-     * this.userService = userService; }
-     */
 
     @ModelAttribute("user")
     public UserLoginDTO userLoginDTO() {

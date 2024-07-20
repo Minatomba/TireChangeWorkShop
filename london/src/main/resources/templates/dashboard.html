@@ -24,7 +24,7 @@
 <nav class="navbar navbar-inverse navbar-fixed-top">
     <div class="container">
         <div class="navbar-header">
-            <h1>Tire Change Workshop</h1>
+            <h1>Tire Change Workshop London</h1>
             <div class="container">
                 <a  class="btn anchor"> <i class="fa fa-arrow-circle-o-left"></i>My Bookings</a><a th:href="@{/logout}" class="btn anchor"> <i class="fa fa-arrow-circle-o-left"></i>&nbsp;Logout</a>
             </div>
@@ -47,7 +47,7 @@
                     <div>
                         <div class="form-group" style="width: 21%;">
                             <label class="control-label" for="from">
-                                From </label>
+                                Vehicle Type: </label>
                             <input id="from" class="form-control"
                                    th:field="*{vehicleType}" required
                                    autofocus="autofocus" />
@@ -55,7 +55,7 @@
 
 
                         <div class="form-group" style="width: 21%;">
-                            <label class="control-label" for="to"> To
+                            <label class="control-label" for="to"> Place of Shop:
                             </label> <input id="to" class="form-control"
                                             th:field="*{placeOfShop}" required autofocus="autofocus"
                         />

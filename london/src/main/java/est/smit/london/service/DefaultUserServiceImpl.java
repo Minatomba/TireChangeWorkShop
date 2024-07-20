@@ -1,8 +1,11 @@
 package est.smit.london.service;
 
+import est.smit.london.DTO.BookingsDTO;
 import est.smit.london.DTO.UserRegisteredDTO;
+import est.smit.london.entity.Bookings;
 import est.smit.london.entity.Role;
 import est.smit.london.entity.User;
+import est.smit.london.repository.BookingsRepository;
 import est.smit.london.repository.RoleRepository;
 import est.smit.london.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -22,6 +25,9 @@ public class DefaultUserServiceImpl implements DefaultUserService {
 
     @Autowired
     private UserRepository userRepo;
+
+    @Autowired
+    private BookingsRepository bookingRepository;
 
     @Autowired
     private RoleRepository roleRepo;
@@ -60,5 +66,27 @@ public class DefaultUserServiceImpl implements DefaultUserService {
         user.setRole(role);
 
         return userRepo.save(user);
+    }
+
+    @Override
+    public Bookings updateBookings(BookingsDTO bookingDTO, UserDetails user) {
+        Bookings booking = new Bookings();
+        String email = user.getUsername();
+        User users = userRepo.findUserByEmail(email);
+        booking.setMechanicName(bookingDTO.getMechanicName());
+        booking.setFilterDate(bookingDTO.getFilterDate());
+        booking.setVehicleType(bookingDTO.getVehicleType());
+        booking.setPlaceOfShop(bookingDTO.getPlaceOfShop());
+        booking.setTotalCalculated(bookingDTO.getTotalCalculated());
+        booking.setTime(bookingDTO.getTime());
+        booking.setUserId(booking.getUserId());
+        booking.setWorkStatus(true);
+        return bookingRepository.save(booking);
+
+    }
+
+    @Override
+    public void sendEmail(BookingsDTO bks, User user, String fileName) {
+
     }
 }
