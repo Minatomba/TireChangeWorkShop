@@ -14,12 +14,4 @@ public class UserLoginDTO {
 
     private String password;
 
-    public String getUserName() {
-        return username;
-    }
-
-    public String getPassword() {
-        return password;
-    }
-
 }

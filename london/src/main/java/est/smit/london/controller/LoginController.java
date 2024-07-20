@@ -10,19 +10,22 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
-@RestController
+@Controller
 @RequestMapping("/login")
 public class LoginController {
 
+
     @Autowired
-    private DefaultUserServiceImpl userService;
+    private DefaultUserService userService;
+
+    private BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
 
     /*
      * public LoginController(DefaultUserService userService) { super();
      * this.userService = userService; }
      */
 
-    @GetMapping("user")
+    @ModelAttribute("user")
     public UserLoginDTO userLoginDTO() {
         return new UserLoginDTO();
     }
@@ -32,9 +35,9 @@ public class LoginController {
         return "login";
     }
 
-    @PostMapping
-    public void loginUser(@RequestBody
+    @PostMapping()
+    public void loginUser(@ModelAttribute("user")
     UserLoginDTO userLoginDTO) {
-       userService.loadUserByUsername(userLoginDTO.getUserName());
+       userService.loadUserByUsername(userLoginDTO.getUsername());
     }
 }

@@ -14,9 +14,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 @RequestMapping("/registration")
 public class RegistrationController {
 
-    private DefaultUserServiceImpl userService;
+    private DefaultUserService userService;
 
-    public RegistrationController(DefaultUserServiceImpl userService) {
+    public RegistrationController(DefaultUserService userService) {
         super();
         this.userService = userService;
     }

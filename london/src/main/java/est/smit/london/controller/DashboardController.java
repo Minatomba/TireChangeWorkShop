@@ -23,9 +23,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 @RequestMapping("/dashboard")
 public class DashboardController {
 
-    private DefaultUserServiceImpl userService;
+    private DefaultUserService userService;
 
-    public DashboardController(DefaultUserServiceImpl userService) {
+    public DashboardController(DefaultUserService userService) {
         super();
         this.userService = userService;
     }
