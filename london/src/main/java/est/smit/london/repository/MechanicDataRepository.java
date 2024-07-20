@@ -9,6 +9,6 @@ import java.util.List;
 
 @Repository
 public interface MechanicDataRepository extends JpaRepository<MechanicData, Integer> {
-    @Query(value = "select * from Reservation where reservation.vehicle_type =:vehicle and reservation.place_of_shop =:place and reservation.filter_date =: date order By reservation.filter_date desc ", nativeQuery = true)
+    @Query(value = "select * from Reservation where reservation.vehicleType =:vehicleType and reservation.placeOfShop =:placeOfShop and reservation.filter_date =:date order By reservation.filter_date desc ", nativeQuery = true)
     List<MechanicData> findByVehicleTypeAndPlaceOfShop(String vehicleType, String placeOfShop, String date);
 }
